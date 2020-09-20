@@ -2,20 +2,42 @@ package cn.xy.service;
 
 import cn.xy.bean.Store;
 
-import java.util.List;
-
+/**
+ * @Description 业务层接口实现页面
+ * @Author  pzg
+ *
+ **/
 public interface StoreService {
     /**
-     * 查询所有农户
-     */
-    List<Store> findAllStore();
+     * @Description 登录方法,通过账号密码登录
+     * @Param username 用户名
+     * @Param password 用户密码
+     **/
+    Store login(String sName, String sPassword);
+
     /**
-     * 根据账号状态查询农户信息
-     */
-    List<Store> findStoreByState(Integer state);
+     * @Description 登录方法,通过手机号和验证码登录
+     * @Param phone 用户手机号
+     * @Param code  验证码
+     **/
+    Store loginByPhone(String sPhone,String code);
     /**
-     * 通过农户编号修改状态
-     */
-    String updateStoreStateById(Integer id,Integer state);
+     * @Description 注册方法,通过账号密码进行注册
+     * @Param username 用户名
+     * @Param password 用户密码
+     * @Param image 用户头像
+     * @Param phone 用户手机号
+     * @Param ucdCard 用户身份证
+     **/
+    int register(String sName,String sPassword,String sImage,String sPhone,int state,String cdCard);
+    /**
+     * @Description 注册方法,通过账号密码进行注册
+     * @Param username 用户名
+     * @Param password 用户密码
+     * @Param image 用户头像
+     * @Param phone 用户手机号
+     * @Param ucdCard 用户身份证
+     **/
+    int registerByPhone(String sName,String sPhone, String sPassword,String cdCard,int state, String code);
 
 }

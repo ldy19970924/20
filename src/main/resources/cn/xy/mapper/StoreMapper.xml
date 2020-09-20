@@ -2,124 +2,34 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 农户登录mapper start-->
 <mapper namespace="cn.xy.mapper.StoreMapper">
-
-    <sql id="base_colums">
-        `sid`,`sname`,`spassword`,`simage`,`sphone`,`state`,`cdcard`,`sfreezetime`,`sunlocktime`
-    </sql>
-    <!--    -->
-    <sql id="base_where">
-        <if test="sid!=null">
-            and `sid`=#{sid,jdbcType=INTEGER}
-        </if>
-        <if test="sname!=null">
-            and sname=#{sname,jdbcType=VARCHAR}
-        </if>
-        <if test="spassword!=null">
-            and spassword=#{spassword,jdbcType=VARCHAR}
-        </if>
-        <if test="simage!=null">
-            and simage=#{simage,jdbcType=VARCHAR}
-        </if>
-        <if test="sphone!=null">
-            and sphone=#{sphone,jdbcType=VARCHAR}
-        </if>
-
-        <if test="state!=null">
-            and state=#{state,jdbcType=INTEGER}
-        </if>
-        <if test="cdcard!=null">
-            and cdcard=#{cdcard,jdbcType=VARCHAR}
-        </if>
-        <if test="sfreezetime!=null">
-            and sfreezetime=#{sfreezetime,jdbcType=VARCHAR}
-        </if>
-        <if test="sunlocktime!=null">
-            and sunlocktime=#{sunlocktime,jdbcType=VARCHAR}
-        </if>
-
-    </sql>
-    <!-- 基本新增使用的字段列表-->
-    <sql id="base_insert_colums">
-        <trim suffixOverrides=",">
-            <if test="sid!=null">
-                `sid`,
-            </if>
-            <if test="sname!=null">
-               sname,
-            </if>
-            <if test="spassword!=null">
-                spassword,
-            </if>
-            <if test="simage!=null">
-                simage,
-            </if>
-            <if test="sphone!=null">
-               sphone=,
-            </if>
-
-            <if test="state!=null">
-                state,
-            </if>
-            <if test="cdcard!=null">
-                cdcard,
-            </if>
-            <if test="sfreezetime!=null">
-                sfreezetime,
-            </if>
-            <if test="sunlocktime!=null">
-                sunlocktime,
-            </if>
-        </trim>
-
-    </sql>
-    <!-- 基本新增使用的值列表-->
-    <sql id="base_insert_values">
-        <trim suffixOverrides=",">
-            <if test="sid!=null">
-                `sid`=#{sid,jdbcType=INTEGER},
-            </if>
-            <if test="sname!=null||saname!=''">
-                sname=#{sname,jdbcType=VARCHAR},
-            </if>
-            <if test="spassword!=null||spassword!=''">
-                spassword=#{spassword,jdbcType=VARCHAR},
-            </if>
-            <if test="simage!=null||simage!=''">
-                simage=#{simage,jdbcType=VARCHAR},
-            </if>
-            <if test="sphone!=null||sphone!=''">
-                sphone=#{sphone,jdbcType=VARCHAR},
-            </if>
-
-            <if test="state!=null">
-                state=#{state,jdbcType=INTEGER},
-            </if>
-            <if test="cdcard!=null||cdcard!=''">
-                cdcard=#{cdcard,jdbcType=VARCHAR},
-            </if>
-            <if test="sfreezetime!=null||sfreezetime!=''">
-                sfreezetime=#{sfreezetime,jdbcType=VARCHAR},
-            </if>
-            <if test="sunlocktime!=null">
-                sunlocktime=#{sunlocktime,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </sql>
-<!--查询所有农户-->
-    <select id="findStore" resultType="cn.xy.bean.Store">
-        select
-        <include refid="base_colums">
-        </include> from `store`
-        <where>
-            <include refid="base_where">
-            </include>
-        </where>
+    <select id="login" parameterType="Store" resultType="Store">
+        select sid,sname,spassword from store
+        where sname=#{sname,jdbcType=VARCHAR}
+        and spassword=#{spassword,jdbcType=VARCHAR}
     </select>
-<!--修改农户状态-->
-    <update id="updateStoreState">
-        update `store`
-        set `state`=#{state}
-        where `sid`=#{sid,jdbcType=INTEGER}
-    </update>
+<!-- 农户登录mapper end-->
+
+<!--  农户手机登录mapper start -->
+    <select id="loginByPhone" parameterType="Store" resultType="Store">
+        select sid,sphone from store
+        where sphone=#{sphone,jdbcType=VARCHAR}
+    </select>
+<!-- 用户农户登录mapper end-->
+
+<!-- 农户注册mapper start   -->
+    <insert id="register" parameterType="Store">
+        insert into store(sname, spassword, simage, sphone, state, cdcard)
+        values(#{sname},#{spassword},#{simage},#{sphone},#{state},#{cdcard})
+    </insert>
+<!-- 农户注册mapper end   -->
+
+<!-- 农户手机注册mapper start-->
+    <insert id="registerByPhone" parameterType="Store">
+        insert into store(sname, spassword,sphone, state, cdcard)
+        values(#{store.sname},#{store.spassword},#{store.sphone},#{store.state},#{store.cdcard})
+    </insert>
+    <!-- 农户手机注册mapper end-->
 </mapper>

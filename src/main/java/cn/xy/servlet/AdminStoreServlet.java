@@ -1,7 +1,7 @@
 package cn.xy.servlet;
 
 import cn.xy.bean.Store;
-import cn.xy.service.StoreService;
+import cn.xy.service.AdminStoreService;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@Controller("store")
-public class StoreServlet extends HttpServlet {
-    @Resource(name = "storeServiceImpl")
-    private StoreService storeService;
+@Controller("adminStoreServlet")
+public class AdminStoreServlet extends HttpServlet {
+    @Resource(name = "adminStoreServiceImpl")
+    private AdminStoreService adminStoreService;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class StoreServlet extends HttpServlet {
      * @param resp
      */
     private void findAllStore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Store> storeAllList = this.storeService.findAllStore();
+        List<Store> storeAllList = this.adminStoreService.findAllStore();
         req.setAttribute("storeAllList",storeAllList);
         req.getRequestDispatcher("/store.jsp").forward(req, resp);
     }
@@ -57,7 +57,7 @@ public class StoreServlet extends HttpServlet {
      */
     private void findStoreByState(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String state = req.getParameter("state");
-        List<Store> storeList = this.storeService.findStoreByState(Integer.valueOf(state));
+        List<Store> storeList = this.adminStoreService.findStoreByState(Integer.valueOf(state));
         req.setAttribute("storeList",storeList);
         req.getRequestDispatcher("/store.jsp").forward(req, resp);
     }

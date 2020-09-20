@@ -77,14 +77,14 @@
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/userInfo/*</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>store</servlet-name>
-        <servlet-class>cn.xy.servlet.ProxyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>store</servlet-name>
-        <url-pattern>/store/*</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>store</servlet-name>-->
+<!--        <servlet-class>cn.xy.servlet.ProxyServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>store</servlet-name>-->
+<!--        <url-pattern>/store/*</url-pattern>-->
+<!--    </servlet-mapping>-->
     <servlet>
         <servlet-name>complaint</servlet-name>
         <servlet-class>cn.xy.servlet.ProxyServlet</servlet-class>
@@ -120,4 +120,36 @@
         <servlet-name>faramProductServlet</servlet-name>
         <url-pattern>/faramproduct/*</url-pattern>
     </servlet-mapping>
+    <!-- 农户 start   -->
+
+    <servlet>
+        <servlet-name>storeLoginServlet</servlet-name>
+        <servlet-class>cn.xy.servlet.ProxyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>storeLoginServlet</servlet-name>
+        <url-pattern>/storeLogin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>storeRegisterServlet</servlet-name>
+        <servlet-class>cn.xy.servlet.ProxyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>storeRegisterServlet</servlet-name>
+        <url-pattern>/storeRegister</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>storeRegisterByPhoneServlet</servlet-name>
+        <servlet-class>cn.xy.servlet.ProxyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>storeRegisterByPhoneServlet</servlet-name>
+        <url-pattern>/storeRegisterByPhone</url-pattern>
+    </servlet-mapping>
+
+    <!-- 农户 end   -->
 </web-app>
