@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  * @author 
  */
 @Data
-@Setter
 @Accessors(chain = true)
 public class Product implements Serializable {
     /**

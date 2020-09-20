@@ -2,17 +2,88 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- cn.xy.mapper Mapper接口路径 -->
 <mapper namespace="cn.xy.mapper.FaramProductMapper">
 
-
+    <sql id="insert_colums">
+        <trim suffixOverrides=",">
+            <if test="productname!=null and productname!=''">
+                productname,
+            </if>
+            <if test="productimage!=null and productimage!=''">
+                `productimage`,
+            </if>
+            <if test="producttime!=null and producttime!=''">
+                `producttime`,
+            </if>
+            <if test="downtime!=null and downtime!=''">
+                `downtime`,
+            </if>
+            <if test="productcount!=null and productcount!=''">
+                `productcount`,
+            </if>
+            <if test="productprice!=null">
+                `productprice`,
+            </if>
+            <if test="origin!=null and origin!=''">
+                `origin`,
+            </if>
+            <if test="sid!=null">
+                `sid`,
+            </if>
+            <if test="pstate!=null">
+                `pstate`,
+            </if>
+            <if test="describe!=null and describe!=''">
+                `describe`,
+            </if>
+            <if test="cateid!=null">
+                `cateid`
+            </if>
+        </trim>
+    </sql>
+    <sql id="inset_values">
+        <trim suffixOverrides=",">
+            <if test="productname!=null and productname!=''">
+                #{productname,jdbcType=VARCHAR},
+            </if>
+            <if test="productimage!=null and productimage!=''">
+                #{productimage,jdbcType=VARCHAR},
+            </if>
+            <if test="producttime!=null and producttime!=''">
+                #{producttime,jdbcType=VARCHAR},
+            </if>
+            <if test="downtime!=null and downtime!=''">
+                #{downtime,jdbcType=VARCHAR},
+            </if>
+            <if test="productcount!=null and productcount!=''">
+                #{productcount,jdbcType=VARCHAR},
+            </if>
+            <if test="productprice!=null">
+                #{productprice,jdbcType=DOUBLE},
+            </if>
+            <if test="origin!=null and origin!=''">
+                #{origin,jdbcType=VARCHAR},
+            </if>
+            <if test="sid!=null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="pstate!=null">
+                #{pstate,jdbcType=INTEGER},
+            </if>
+            <if test="describe!=null and describe!=''">
+                #{describe,jdbcType=INTEGER},
+            </if>
+            <if test="cateid!=null">
+                #{cateid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </sql>
     <insert id="insertProduct" parameterType="cn.xy.bean.Product">
         insert  into `product`(
-        `productname`,`productimage`,`producttime`,
-        `productcount`,`productprice`,`origin`,`sid`,`pstate`,`describe`,`cateid`
+        <include refid="insert_colums"/>
         )
-     values (`productname` =#{productname,jdbcType=VARCHAR},`productimage` =#{productimage,jdbcType=VARCHAR},`producttime` = #{producttime,jdbcType=VARCHAR},`productcount` = #{productcount,jdbcType=INTEGER},`productprice` = #{productprice,jdbcType=DOUBLE},
-        `origin` = #{origin,jdbcType=VARCHAR},`sid` = #{sid,jdbcType=INTEGER},`pstate` = #{pstate,jdbcType=INTEGER},`describe` = #{describe,jdbcType=VARCHAR},`cateid` = #{cateid,jdbcType=INTEGER})
+        values (<include refid="inset_values">
+    </include>)
 
     </insert>
 
